@@ -302,3 +302,26 @@ input[name="top5"] {
 #세이브label:checked ~ ul {
   display: block;
 }
+
+/* 메인페이지 -> goods 영역 */
+.goods {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.goods > img {
+  width: 200px;
+  height: 180px;
+  margin: 15px;
+  border-radius: 20px;
+}
+
+#goods_item {
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+#goods_item:hover {
+  transform: scale(1.2);
+}
