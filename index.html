@@ -123,9 +123,175 @@
                     <td></td>
                 </tr>
             </table>
-
         </div>
         <!-- game schedule 영역 끝 -->
+
+        <!-- ranking 영역 시작 -->
+        <div class="main">
+            <h1>RANKING</h1>
+            <div class="ranking_menu">
+                <ul>
+                    <li>나이트 리그
+                        <ul>
+                            <li><label for="나이트투수label">투수</label></li>
+                            <li><label for="나이트타자label">타자</label></li>
+                        </ul>
+                    </li>
+                    <li>주말 리그
+                        <ul>
+                            <li><label for="주말투수label">투수</label></li>
+                            <li><label for="주말타자label">타자</label></li>
+                        </ul>
+                    </li>
+                    <li>새벽 리그
+                        <ul>
+                            <li><label for="새벽투수label">투수</label></li>
+                            <li><label for="새벽타자label">타자</label></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <input id="나이트투수label" type="radio" name="tota">
+            <input id="나이트타자label" type="radio" name="tota">
+            <input id="주말투수label" type="radio" name="tota">
+            <input id="주말타자label" type="radio" name="tota">
+            <input id="새벽투수label" type="radio" name="tota">
+            <input id="새벽타자label" type="radio" name="tota">
+
+            <div class="tota" id="나이트투수">
+                <h3>나이트 리그 투수 순위</h3>
+                <p>1. 나일투</p>
+                <p>2. 나이투</p>
+                <p>3. 나삼투</p>
+                <p>4. 나사투</p>
+                <p>5. 나오투</p>
+                <p>6. 나육투</p>
+                <p>7. 나칠투</p>
+            </div>
+            <div class="tota" id="나이트타자">
+                <h3>나이트 리그 타자 순위</h3>
+                <p>1. 나일타</p>
+                <p>2. 나이타</p>
+                <p>3. 나삼타</p>
+                <p>4. 나사타</p>
+                <p>5. 나오타</p>
+                <p>6. 나육타</p>
+                <p>7. 나칠타</p>
+            </div>
+
+            <div class="tota" id="주말투수">
+                <h3>주말 리그 투수 순위</h3>
+                <p>1. 주일투</p>
+                <p>2. 주이투</p>
+                <p>3. 주삼투</p>
+                <p>4. 주사투</p>
+                <p>5. 주오투</p>
+                <p>6. 주육투</p>
+                <p>7. 주칠투</p>
+            </div>
+            <div class="tota" id="주말타자">
+                <h3>주말 리그 타자 순위</h3>
+                <p>1. 주일타</p>
+                <p>2. 주이타</p>
+                <p>3. 주삼타</p>
+                <p>4. 주사타</p>
+                <p>5. 주오타</p>
+                <p>6. 주육타</p>
+                <p>7. 주칠타</p>
+            </div>
+
+            <div class="tota" id="새벽투수">
+                <h3>새벽 리그 투수 순위</h3>
+                <p>1. 새일투</p>
+                <p>2. 새이투</p>
+                <p>3. 새삼투</p>
+                <p>4. 새사투</p>
+                <p>5. 새오투</p>
+                <p>6. 새육투</p>
+                <p>7. 새칠투</p>
+            </div>
+            <div class="tota" id="새벽타자">
+                <h3>새벽 리그 타자 순위</h3>
+                <p>1. 새일타</p>
+                <p>2. 새이타</p>
+                <p>3. 새삼타</p>
+                <p>4. 새사타</p>
+                <p>5. 새오타</p>
+                <p>6. 새육타</p>
+                <p>7. 새칠타</p>
+            </div>
+
+            <ul class="accordion">
+                <li>
+                    <input id="타율label" type="radio" name="top5">
+                    <label for="타율label">타율</label>
+                    <ul>
+                        <li>TOP 1. 일타율</li>
+                        <li>TOP 2. 이타율</li>
+                        <li>TOP 3. 삼타율</li>
+                        <li>TOP 4. 사타율</li>
+                        <li>TOP 5. 오타율</li>
+                    </ul>
+                </li>
+                <li>
+                    <input id="홈런label" type="radio" name="top5">
+                    <label for="홈런label">홈런</label>
+                    <ul>
+                        <li>TOP 1. 일홈런</li>
+                        <li>TOP 2. 이홈런</li>
+                        <li>TOP 3. 삼홈런</li>
+                        <li>TOP 4. 사홈런</li>
+                        <li>TOP 5. 오홈런</li>
+                    </ul>
+                </li>
+                <li>
+                    <input id="다승label" type="radio" name="top5">
+                    <label for="다승label">다승</label>
+                    <ul>
+                        <li>TOP 1. 일다승</li>
+                        <li>TOP 2. 이다승</li>
+                        <li>TOP 3. 삼다승</li>
+                        <li>TOP 4. 사다승</li>
+                        <li>TOP 5. 오다승</li>
+                    </ul>
+                </li>
+                <li>
+                    <input id="평균자책label" type="radio" name="top5">
+                    <label for="평균자책label">평균자책</label>
+                    <ul>
+                        <li>TOP 1. 일평자</li>
+                        <li>TOP 2. 이평자</li>
+                        <li>TOP 3. 삼평자</li>
+                        <li>TOP 4. 사평자</li>
+                        <li>TOP 5. 오평자</li>
+                    </ul>
+                </li>
+                <li>
+                    <input id="탈삼진label" type="radio" name="top5">
+                    <label for="탈삼진label">탈삼진</label>
+                    <ul>
+                        <li>TOP 1. 일삼진</li>
+                        <li>TOP 2. 이삼진</li>
+                        <li>TOP 3. 삼삼진</li>
+                        <li>TOP 4. 사삼진</li>
+                        <li>TOP 5. 오삼진</li>
+                    </ul>
+                </li>
+                <li>
+                    <input id="세이브label" type="radio" name="top5">
+                    <label for="세이브label">세이브</label>
+                    <ul>
+                        <li>TOP 1. 일세이</li>
+                        <li>TOP 2. 이세이</li>
+                        <li>TOP 3. 삼세이</li>
+                        <li>TOP 4. 사세이</li>
+                        <li>TOP 5. 오세이</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- ranking 영역 끝 -->
     </div>
 
     <input id="calenderModal" type="checkbox">

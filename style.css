@@ -1,9 +1,9 @@
 @keyframes fadein {
   from {
-      opacity: 0;
+    opacity: 0;
   }
   to {
-      opacity: 1;
+    opacity: 1;
   }
 }
 
@@ -40,6 +40,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 3;
 }
 
 header > ul {
@@ -237,4 +238,67 @@ label {
 
 #calenderModal {
   display: none;
+}
+
+/* 메인페이지 -> ranking 영역 */
+.ranking_menu ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ranking_menu ul li {
+  margin: 8px;
+  cursor: pointer;
+}
+
+.tota {
+  display: none;
+}
+
+input[name="tota"] {
+  display: none;
+}
+
+#나이트투수label:checked ~ #나이트투수,
+#나이트타자label:checked ~ #나이트타자,
+#주말투수label:checked ~ #주말투수,
+#주말타자label:checked ~ #주말타자,
+#새벽투수label:checked ~ #새벽투수,
+#새벽타자label:checked ~ #새벽타자 {
+  display: block;
+}
+
+.accordion > li > ul {
+  display: none;
+}
+
+.accordion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.accordion > li {
+  width: 250px;
+  padding: 5px 10px;
+  border: 1px solid black;
+}
+
+.accordion > li > ul {
+  border-top: 1px solid black;
+}
+
+input[name="top5"] {
+  display: none;
+}
+
+#타율label:checked ~ ul,
+#홈런label:checked ~ ul,
+#다승label:checked ~ ul,
+#평균자책label:checked ~ ul,
+#탈삼진label:checked ~ ul,
+#세이브label:checked ~ ul {
+  display: block;
 }
