@@ -325,3 +325,80 @@ input[name="top5"] {
 #goods_item:hover {
   transform: scale(1.2);
 }
+
+/* information 페이지 */
+.sub_information {
+  text-align: center;
+}
+
+.information_img {
+  margin: 0 auto;
+  width: 1000px;
+  height: 500px;
+  background-image: url(./img/information_sub.jpg);
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.information_img div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  width: 100%;
+  height: 100%;
+}
+
+.information_img div p {
+  margin: 10px 0;
+}
+
+.sub_information_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  text-align: left;
+}
+
+.sub_information_div div {
+  margin: 10px;
+  padding: 25px;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+.information_rule {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: left;
+}
+
+.information_rule div {
+  margin: 10px;
+}
+
+.information_rule div p {
+  padding: 15px;
+  margin: 10px;
+  border-radius: 15px;
+  border: 1px solid black;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  transform: scale(1);
+}
+
+.information_rule div p:hover {
+  transform: scale(1.05);
+}
+
+.now {
+  font-weight: 700;
+}
