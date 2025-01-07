@@ -26,7 +26,33 @@
     </header>
     <!-- 헤더 끝 -->
 
-    <div class="container"></div>
+    <div class="container chart_main">
+        <!-- 방문자 차트 영역 시작 -->
+        <h1>방문자 수 조회</h1>
+        <div class="chart_menu">
+            <select name="league" id="league">
+                <option value="0">나이트 리그</option>
+                <option value="1">주말 리그</option>
+                <option value="2">새벽 리그</option>
+            </select>
+
+            <select name="week" id="week">
+                <option value="0">월요일</option>
+                <option value="1">화요일</option>
+                <option value="2">수요일</option>
+                <option value="3">목요일</option>
+                <option value="4">금요일</option>
+                <option value="5">토요일</option>
+                <option value="6">일요일</option>
+            </select>
+
+            <button onclick="widthChart()">가로로 보기</button>
+            <button onclick="heightChart()">세로로 보기</button>
+        </div>
+
+        <div id="chartDiv" class="chart_height"></div>
+        <!-- 방문자 차트 영역 끝 -->
+    </div>
 
     <!-- 푸터 시작 -->
     <footer>
@@ -39,6 +65,8 @@
         </div>
     </footer>
     <!-- 푸터 끝 -->
+
+    <script src="./script.js"></script>
 </body>
 
 </html>

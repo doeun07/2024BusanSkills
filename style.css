@@ -402,3 +402,80 @@ input[name="top5"] {
 .now {
   font-weight: 700;
 }
+
+/* statistics 페이지 -> 방문자 차트 영역 */
+.chart_main {
+  text-align: center;
+}
+
+.chart_menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.chart_menu select,
+.chart_menu button {
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 10px;
+  border: 1px solid black;
+  background-color: white;
+  cursor: pointer;
+}
+
+.chart_width {
+  width: 600px;
+  height: 600px;
+  background-color: antiquewhite;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  flex-direction: column;
+  text-align: left;
+}
+
+.chart_height {
+  width: 600px;
+  height: 600px;
+  background-color: antiquewhite;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.width_parents {
+  display: flex;
+  align-items: center;
+  animation: fadein 0.5s;
+}
+
+.height_parents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px;
+  animation: fadein 0.5s;
+}
+
+.width {
+  height: 80px;
+  background-color: black;
+  margin: 10px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.height {
+  width: 80px;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
