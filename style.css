@@ -416,7 +416,8 @@ input[name="top5"] {
 }
 
 .chart_menu select,
-.chart_menu button {
+.chart_menu button,
+.goodsSale_menu select {
   padding: 5px 10px;
   margin: 5px;
   border-radius: 10px;
@@ -478,4 +479,84 @@ input[name="top5"] {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* statistics 페이지 -> GOODS 판매 영역 */
+.goodsSale_menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#goodsGroup {
+  display: flex;
+  justify-content: center;
+  margin: 0 10px;
+}
+
+#goodsGroup > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+}
+
+#goodsGroup > div p {
+  margin: 0 5px;
+}
+
+#goodsList,
+#bestGoods {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+#goodsList > div,
+#bestGoods > div {
+  margin: 0 5px;
+  animation: fadein 0.5s;
+}
+
+/* statistics 페이지 -> goods 수정제안 영역 */
+#imgInput {
+  display: none;
+}
+
+#goodsEdit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 500px;
+  background-color: rgb(224, 224, 224);
+}
+
+/* 이미지 영역 */
+#goodsEditImg {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 90%;
+  background-size: cover;
+  background-position: center;
+  transition: all 0.3s ease;
+}
+
+/* 수정제안 모달 -> 글상자 스타일 */
+.textbox {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: move;
+  width: auto; /* 필요한 경우 크기를 자동으로 조정 */
+  max-width: 90%; /* 영역 밖으로 넘치지 않도록 제한 */
+  word-wrap: break-word; /* 긴 텍스트 자동 줄바꿈 */
 }
