@@ -414,3 +414,84 @@ function imgDownload() {
     alert("배경 이미지를 로드할 수 없습니다.");
   };
 }
+
+const usernameInput = document.querySelector("#username");
+let is_idCheck = false;
+// 아이디 중복확인
+function idCheck() {
+  const username = document.querySelector("#username").value;
+
+  if (!username) {
+    alert("아이디를 입력해주세요!");
+  } else {
+    $.post("./api/register", {
+      username: username,
+      id_check: true,
+    }).done(function (data) {
+      if (data == "사용가능한 ID입니다.") {
+        alert(data);
+        usernameInput.readOnly = true;
+        is_idCheck = true;
+      } else {
+        alert(data);
+      }
+    });
+  }
+}
+
+// 한글만 입력
+function nameCheck(name) {
+  const regExp = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
+  if (regExp.test(name)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// 영어, 숫자만 입력
+function usernameCheck(username) {
+  const regExp = /^[a-zA-Z0-9]+$/;
+  if (regExp.test(username)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// 회원가입
+function register() {
+  const username = document.querySelector("#username").value;
+  const name = document.querySelector("#name").value;
+  const password = document.querySelector("#password").value;
+
+  if (!username) {
+    alert("아이디를 입력해주세요!");
+  } else if (!name) {
+    alert("이름을 입력해주세요!");
+  } else if (!password) {
+    alert("비밀번호를 입력해주세요!");
+  } else if (!is_idCheck) {
+    alert("아이디 중복 확인을 해주세요!");
+  } else if (!usernameCheck(username)) {
+    alert("아이디는 영어와 숫자만 입력 가능합니다!");
+    usernameInput.readOnly = false;
+    is_idCheck = false;
+  } else if (!nameCheck(name)) {
+    alert("이름은 한글만 입력 가능합니다!");
+  } else {
+    $.post("./api/register", {
+      username: username,
+      name: name,
+      password: password,
+      is_register: true,
+    }).done(function (data) {
+      if (data == "회원가입이 완료되었습니다.") {
+        alert(data);
+        location.href = "login";
+      } else {
+        console.log(data);
+      }
+    });
+  }
+}

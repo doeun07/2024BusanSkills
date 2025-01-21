@@ -15,14 +15,10 @@
         <div class="login">
             <div>
                 <input type="text" id="username" placeholder="아이디를 입력하세요.">
+                <button onclick="idCheck()" class="btn btn-dark">ID 중복 확인</button>
                 <input type="text" id="name" placeholder="이름을 입력하세요.">
                 <input type="password" id="password" placeholder="비밀번호를 입력하세요.">
-                <select name="" id="mb_level">
-                    <option value="일반회원">일반회원</option>
-                    <option value="담당자">담당자</option>
-                    <option value="관리자">관리자</option>
-                </select>
-                <button class="btn btn-dark m-2">회원가입</button>
+                <button onclick="register()" class="btn btn-dark m-2">회원가입</button>
             </div>
         </div>
     </div>
