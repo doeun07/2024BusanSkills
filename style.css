@@ -69,6 +69,7 @@ footer {
   align-items: center;
   background-color: gray;
   padding: 30px;
+  height: 200px;
 }
 
 /* 메인페이지 */
@@ -559,4 +560,32 @@ input[name="top5"] {
   width: auto; /* 필요한 경우 크기를 자동으로 조정 */
   max-width: 90%; /* 영역 밖으로 넘치지 않도록 제한 */
   word-wrap: break-word; /* 긴 텍스트 자동 줄바꿈 */
+}
+
+/* 로그인 페이지 */
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: calc(100vh - 280px);
+}
+
+.login input,
+.login select {
+  padding: 10px 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 5px 0;
+}
+
+.login > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 40%;
+  height: 60%;
+  border-radius: 20px;
+  border: 1px solid black;
 }

@@ -23,6 +23,12 @@ switch ($resource[1]) {
     case "goods":
         $page = "./pages/sub04.php";
         break;
+    case "login":
+        $page = "./pages/login.php";
+        break;
+    case "register":
+        $page = "./pages/register.php";
+        break;
     default:
         echo "잘못된 접근입니다.";
         return 0;
