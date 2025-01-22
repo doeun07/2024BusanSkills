@@ -9,19 +9,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(":username", $username);
     $stmt->bindParam(":password", $password);
     $stmt->bindParam(":mb_level", $mb_level);
-<<<<<<< HEAD
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-
-=======
-    $user = $stmt->execute();
->>>>>>> f7e54e1e965d1c81ec3841ec6b165b2910bfa690
 
     if (!$user) {
         echo "아이디 또는 비밀번호를 확인해주세요.";
     } else {
-<<<<<<< HEAD
         $date = date("Y-m-d H:i:s");
         $sql2 = "UPDATE users SET login_date = :login_date WHERE user_idx = :user_idx";
         $stmt2 = $pdo->prepare($sql2);
@@ -37,8 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "message" => "로그인이 완료되었습니다.",
             "login_date" => $login_date,
         ], JSON_UNESCAPED_UNICODE);
-=======
         echo "로그인이 완료되었습니다.";
->>>>>>> f7e54e1e965d1c81ec3841ec6b165b2910bfa690
     }
 }
