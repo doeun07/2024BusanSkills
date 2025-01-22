@@ -41,6 +41,9 @@ if ($resource[1] == "api") {
         case "login":
             $page = "./pages/login.php";
             break;
+        case "logout":
+            $page = "./pages/logout.php";
+            break;
         case "register":
             $page = "./pages/register.php";
             break;
