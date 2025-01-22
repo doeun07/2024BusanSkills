@@ -495,32 +495,3 @@ function register() {
     });
   }
 }
-
-// 로그인
-function login() {
-  const username = document.querySelector("#username").value;
-  const password = document.querySelector("#password").value;
-  const mb_level = document.querySelector("#mb_level").value;
-
-  if (!username) {
-    alert("아이디를 입력해주세요!");
-  } else if (!password) {
-    alert("비밀번호를 입력해주세요!");
-  } else if (!mb_level) {
-    alert("회원등급을 선택해주세요!");
-  } else {
-    $.post("./api/login", {
-      username: username,
-      password: password,
-      mb_level: mb_level,
-    }).done((data) => {
-      const login_data = JSON.parse(data);
-      if (login_data.message == "로그인이 완료되었습니다.") {
-        alert(`최신 로그인 일자 : ${login_data.login_date}`);
-        location.href = "/";
-      } else {
-        alert(login_data);
-      }
-    });
-  }
-}
