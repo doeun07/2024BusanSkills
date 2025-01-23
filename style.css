@@ -631,3 +631,12 @@ input[name="top5"] {
 #total_price {
   margin-top: 20px;
 }
+
+/* 마이페이지 -> 일반회원 영역 */
+.mypage {
+  text-align: center;
+}
+
+.mypage > table {
+  text-align: center;
+}
