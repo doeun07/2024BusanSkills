@@ -514,13 +514,16 @@ function login() {
       password: password,
       mb_level: mb_level,
     }).done((data) => {
-      const login_data = JSON.parse(data);
-
-      if (login_data.message === "로그인이 완료되었습니다.") {
-        alert(`최신 로그인 일자 : ${login_data.login_date}`);
-        location.href = "/";
+      if (data == "아이디 또는 비밀번호를 확인해주세요.") {
+        alert(data);
       } else {
-        console.log(login_data);
+        const login_data = JSON.parse(data);
+        if (login_data.message === "로그인이 완료되었습니다.") {
+          alert(`최신 로그인 일자 : ${login_data.login_date}`);
+          location.href = "/";
+        } else {
+          console.log(login_data);
+        }
       }
     });
   }
