@@ -15,6 +15,9 @@ if ($resource[1] == "api") {
         case "login":
             $page = "./api/login.php";
             break;
+        case "reservation":
+            $page = "./api/reservation.php";
+            break;
         default:
             echo "잘못된 api 접근입니다.";
             break;

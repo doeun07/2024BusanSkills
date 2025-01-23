@@ -589,3 +589,45 @@ input[name="top5"] {
   border-radius: 20px;
   border: 1px solid black;
 }
+
+/* RESERVATION 페이지 -> 일반회원 영역 */
+.reservation_main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  height: calc(100vh - 280px);
+}
+
+.reservation {
+  width: 40%;
+  height: 100%;
+  margin: 20px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid black;
+  align-items: start;
+  padding: 0 20px;
+}
+
+.reservation > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.reservation input,
+.reservation select {
+  padding: 5px 10px;
+  margin: 0 10px;
+  border-radius: 20px;
+  border: 1px solid black;
+}
+
+#total_price {
+  margin-top: 20px;
+}

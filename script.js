@@ -528,3 +528,84 @@ function login() {
     });
   }
 }
+
+// reservation 페이지 -> 일반회원
+// 리그에 따른 시간 옵션 추가
+let leaguePrice = 0;
+let totalPrice = 0;
+function addLeagueTime() {
+  const league = document.querySelector("#league").value;
+  const timeElem = document.querySelector("#time");
+  timeElem.innerHTML = "";
+  if (league == "나이트") {
+    timeElem.append(new Option("19시", "19"));
+    timeElem.append(new Option("23시", "23"));
+    leaguePrice = 50000;
+  } else if (league == "주말") {
+    timeElem.append(new Option("9시", "09"));
+    timeElem.append(new Option("13시", "13"));
+    timeElem.append(new Option("15시", "15"));
+    leaguePrice = 100000;
+  } else if (league == "새벽") {
+    timeElem.append(new Option("4시", "04"));
+    timeElem.append(new Option("7시", "07"));
+    leaguePrice = 30000;
+  }
+
+  totalPriceCal();
+}
+
+// 최종금액 계산
+function totalPriceCal() {
+  const min_human = document.querySelector("#min_human").value;
+  const totalPriceElem = document.querySelector("#total_price");
+  totalPrice = leaguePrice;
+  if (min_human < 20) {
+    alert("최소인원은 20명 이상입니다.");
+  } else if (min_human > 20) {
+    totalPrice += (min_human - 20) * 1000;
+  }
+
+  totalPriceElem.innerText = `최종금액 : ${totalPrice.toLocaleString()}원`;
+}
+
+function reservation() {
+  const res_date = document.querySelector("#res_date").value;
+  const league = document.querySelector("#league").value;
+  const time = document.querySelector("#time").value;
+  const min_human = document.querySelector("#min_human").value;
+  // 사용자가 선택한 날짜가 무슨 요일인지 변환
+  const holiday = new Date(res_date).getDay();
+
+  if (!res_date) {
+    alert("예약할 날짜를 선택해주세요!");
+  } else if (!league) {
+    alert("예약할 리그를 선택해주세요!");
+  } else if (!time) {
+    alert("예약할 시간을 선택해주세요!");
+  } else if (!min_human) {
+    alert("예약할 인원을 입력해주세요!");
+  } else if (min_human < 20) {
+    alert("최소인원은 20명 이상입니다.");
+  } else if (holiday == 1 && time == 4) {
+    alert("해당 날짜&시간은 휴일입니다!");
+  } else {
+    $.post("./api/reservation", {
+      reservation: true,
+      res_date: res_date,
+      league: league,
+      res_time: time,
+      min_human: min_human,
+      price: totalPrice,
+    }).done((data) => {
+      if (data == "예약이 완료되었습니다.") {
+        alert(data);
+        location.href = "mypage";
+      } else if (data == "해당 날짜&시간은 휴일입니다!") {
+        alert(data);
+      } else {
+        console.log(data);
+      }
+    });
+  }
+}
