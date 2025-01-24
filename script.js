@@ -588,7 +588,7 @@ function reservation() {
   } else if (min_human < 20) {
     alert("최소인원은 20명 이상입니다.");
   } else if (holiday == 1 && time == 4) {
-    alert("해당 날짜&시간은 휴일입니다!");
+    alert("해당 날짜는 휴일로 지정되었습니다.");
   } else {
     $.post("./api/reservation", {
       reservation: true,
@@ -601,7 +601,7 @@ function reservation() {
       if (data == "예약이 완료되었습니다.") {
         alert(data);
         location.href = "mypage";
-      } else if (data == "해당 날짜&시간은 휴일입니다!") {
+      } else if (data == "해당 날짜는 휴일로 지정되었습니다.") {
         alert(data);
       } else {
         console.log(data);
