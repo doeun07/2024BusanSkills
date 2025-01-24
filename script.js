@@ -667,3 +667,155 @@ function deleteReservationAll() {
     }
   });
 }
+
+// 관리자 예약 결제 승인
+function reservationPayApp(res_idx) {
+  $.post("./api/reservation", {
+    resPay_app: true,
+    res_idx: res_idx,
+  }).done((data) => {
+    if (data == "결제가 완료되었습니다.") {
+      alert(data);
+      location.href = "reservation";
+    } else {
+      console.log(data);
+    }
+  });
+}
+
+function holidaySelectWay() {
+  const holidayElem = document.querySelector("#holiday_select");
+  const holiday_type = document.querySelector("#holiday_type").value;
+
+  if (!holiday_type) {
+    alert("휴일 지정 방법을 선택해주세요.");
+  } else if (holiday_type == "date") {
+    holidayElem.innerHTML = `
+          <div>
+            <span>예약 날짜 : </span>
+            <input id="date" type="date">
+          </div>
+          <button class="btn btn-danger" onclick="resDateHoliday()">휴일 지정</button>
+          `;
+  } else {
+    holidayElem.innerHTML = `
+          <div>
+              <span>예약 날짜 : </span>
+              <input id="date" type="date">
+          </div>
+          <div>
+              <span>리그 :</span>
+              <select name="" onchange="holidayTimeAdd()" id="league">
+                  <option value="나이트">나이트 리그</option>
+                  <option value="주말">주말 리그</option>
+                  <option value="새벽">새벽 리그</option>
+              </select>
+          </div>
+          <div>
+              <span>시간 :</span>
+              <select name="" id="time"></select>
+          </div>
+          <button class="btn btn-danger" onclick="resLeagueHoliday()">휴일 지정</button>
+          `;
+    holidayTimeAdd();
+  }
+}
+
+function holidayTimeAdd() {
+  const league = document.querySelector("#league").value;
+  const timeElem = document.querySelector("#time");
+  timeElem.innerHTML = "";
+  if (league == "나이트") {
+    timeElem.append(new Option("19시", "19"));
+    timeElem.append(new Option("23시", "23"));
+    leaguePrice = 50000;
+  } else if (league == "주말") {
+    timeElem.append(new Option("9시", "09"));
+    timeElem.append(new Option("13시", "13"));
+    timeElem.append(new Option("15시", "15"));
+    leaguePrice = 100000;
+  } else if (league == "새벽") {
+    timeElem.append(new Option("4시", "04"));
+    timeElem.append(new Option("7시", "07"));
+    leaguePrice = 30000;
+  }
+}
+
+// 날짜로 휴일 지정
+function resDateHoliday() {
+  const date = document.querySelector("#date").value;
+  const nightLeague = ["19", "23"];
+  const weekLeague = ["09", "13", "15"];
+  const dawnLeague = ["04", "07"];
+
+  if (!date) {
+    alert("날짜를 입력해주세요!");
+  } else {
+    nightLeague.forEach((item) => {
+      $.post("./api/reservation", {
+        holiday: true,
+        date: date,
+        league: "나이트",
+        time: item,
+      }).done((data) => {
+        if (data != "휴일 지정이 완료되었습니다.") {
+          console.log(data);
+        }
+      });
+    });
+    weekLeague.forEach((item) => {
+      $.post("./api/reservation", {
+        holiday: true,
+        date: date,
+        league: "주말",
+        time: item,
+      }).done((data) => {
+        if (data != "휴일 지정이 완료되었습니다.") {
+          console.log(data);
+        }
+      });
+    });
+    dawnLeague.forEach((item) => {
+      $.post("./api/reservation", {
+        holiday: true,
+        date: date,
+        league: "새벽",
+        time: item,
+      }).done((data) => {
+        if (data != "휴일 지정이 완료되었습니다.") {
+          console.log(data);
+        }
+      });
+    });
+    alert("휴일 지정이 완료되었습니다.");
+    location.href = "reservation";
+  }
+}
+
+// 리그로 휴일 지정
+function resLeagueHoliday() {
+  const date = document.querySelector("#date").value;
+  const league = document.querySelector("#league").value;
+  const time = document.querySelector("#time").value;
+
+  if (!date) {
+    alert("날짜를 입력 해주세요!");
+  } else if (!league) {
+    alert("리그를 선택해주세요!");
+  } else if (!time) {
+    alert("시간을 선택해주세요!");
+  } else {
+    $.post("./api/reservation", {
+      holiday: true,
+      date: date,
+      league: league,
+      time: time,
+    }).done((data) => {
+      if (data == "휴일 지정이 완료되었습니다.") {
+        alert(data);
+      } else {
+        console.log(data);
+      }
+    });
+  }
+}

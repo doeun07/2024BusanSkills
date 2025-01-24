@@ -621,7 +621,10 @@ input[name="top5"] {
 }
 
 .reservation input,
-.reservation select {
+.reservation select,
+.holiday_menu select,
+#holiday_select select,
+#holiday_select input {
   padding: 5px 10px;
   margin: 0 10px;
   border-radius: 20px;
@@ -643,6 +646,46 @@ input[name="top5"] {
   justify-content: space-between;
   margin: 10px 0;
   align-items: center;
+}
+
+/* RESERVATION 페이지 -> 관리자 영역 */
+.res_admin {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.holiday_menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 20px;
+  border: 1px solid black;
+  width: 50%;
+  padding: 30px;
+  margin: 10px;
+}
+
+.holiday {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+#holiday_select > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.holiday_admin {
+  margin-bottom: 30px;
 }
 
 /* 마이페이지 -> 일반회원 영역 */

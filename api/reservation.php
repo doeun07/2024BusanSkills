@@ -53,5 +53,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->execute();
         }
         echo "예약이 전체 삭제 되었습니다.";
+    } else if (isset($_POST["resPay_app"])) {
+        $res_idx = $_POST["res_idx"];
+        $sql = "UPDATE reservations SET pay_status = '결제완료' WHERE res_idx = :res_idx";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":res_idx", $res_idx);
+        $stmt->execute();
+
+        echo "결제가 완료되었습니다.";
+    } else if (isset($_POST["holiday"])) {
+        $date = $_POST["date"];
+        $league = $_POST["league"];
+        $time = $_POST["time"];
+
+        $sql = "INSERT INTO holiday (date, league, time) VALUE (?, ?, ?)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$date, $league, $time]);
+
+        echo "휴일 지정이 완료되었습니다.";
     }
 }

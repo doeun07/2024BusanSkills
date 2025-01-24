@@ -123,6 +123,77 @@
                 </tbody>
             </table>
         <?php
+        } else if (isset($_SESSION["user_idx"]) && $_SESSION["mb_level"] == "관리자") {
+            $yesterDay = date("Y-m-d", strtotime("-1 days"));
+            $sql = "SELECT * FROM reservations
+                        INNER JOIN users 
+                        ON reservations.user_idx = users.user_idx
+                        WHERE res_status = '승인완료'
+                        AND res_date > :yesterDay";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(":yesterDay", $yesterDay);
+            $stmt->execute();
+            $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        ?>
+            <div class="holiday_admin res_admin">
+                <h2>휴일 지정</h2>
+                <div class="holiday_menu">
+                    <div>
+                        <span>휴일 지정 방법 선택 : </span>
+                        <select onchange="holidaySelectWay()" name="" id="holiday_type">
+                            <option value="date">날짜로 휴일 지정</option>
+                            <option value="league">리그로 휴일 지정</option>
+                        </select>
+                    </div>
+                    <div id="holiday_select"></div>
+                </div>
+            </div>
+            <div class="res_admin">
+                <h2>결제 승인</h2>
+            </div>
+            <table class="res_table table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">예약자 ID</th>
+                        <th scope="col">예약자 이름</th>
+                        <th scope="col">리그</th>
+                        <th scope="col">날짜</th>
+                        <th scope="col">시간</th>
+                        <th scope="col">인원</th>
+                        <th scope="col">금액</th>
+                        <th scope="col">결제상태</th>
+                        <th scope="col">결제승인버튼</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($reservations as $reservation) {
+                        $reservationHtml = "";
+                        $reservationHtml .= "<tr>";
+                        $reservationHtml .= "<td>" . $reservation["username"] . "</td>";
+                        $reservationHtml .= "<td>" . $reservation["name"] . "</td>";
+                        $reservationHtml .= "<td>" . $reservation["league"] . "</td>";
+                        $reservationHtml .= "<td>" . $reservation["res_date"] . "</td>";
+                        $reservationHtml .= "<td>" . $reservation["res_time"] . "</td>";
+                        $reservationHtml .= "<td>" . $reservation["min_human"] . "</td>";
+                        $reservationHtml .= "<td>" . number_format($reservation["price"]) . "원</td>";
+                        $reservationHtml .= "<td>" . $reservation["pay_status"] . "</td>";
+                        if ($reservation["pay_status"] == "결제요청") {
+                            $reservationHtml .= "<td><button class='btn btn-primary' onclick='reservationPayApp(" . $reservation["res_idx"] . ")'>결제 승인</button></td>";
+                        } else {
+                            $reservationHtml .= "<td><button class='btn btn-primary' disabled>결제 승인</button></td>";
+                        }
+                        $reservationHtml .= "</tr>";
+
+                        echo $reservationHtml;
+                    }
+
+                    ?>
+                </tbody>
+            </table>
+
+        <?php
         }
         ?>
     </div>
@@ -131,6 +202,9 @@
     <script src="../선수제공파일/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
     <script src="../선수제공파일/bootstrap-5.2.0-dist/js/bootstrap.js"></script>
     <script src="../script.js"></script>
+    <script>
+        holidaySelectWay();
+    </script>
 </body>
 
 </html>
