@@ -632,6 +632,19 @@ input[name="top5"] {
   margin-top: 20px;
 }
 
+/* RESERVATION 페이지 -> 담당자 영역 */
+.res_table {
+  text-align: center;
+  margin: 10px;
+}
+
+.reservation_menu {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  align-items: center;
+}
+
 /* 마이페이지 -> 일반회원 영역 */
 .mypage {
   text-align: center;

@@ -609,3 +609,61 @@ function reservation() {
     });
   }
 }
+
+// 담당자 예약 승인
+function reservationApp(res_idx) {
+  $.post("./api/reservation", {
+    res_app: true,
+    res_idx: res_idx,
+  }).done((data) => {
+    if (data == "예약 승인이 완료되었습니다.") {
+      alert(data);
+      location.href = "reservation";
+    } else {
+      console.log(data);
+    }
+  });
+}
+
+// 담당자 예약 삭제
+function deleteReservation(res_idx) {
+  $.post("./api/reservation", {
+    res_del: true,
+    res_idx: res_idx,
+  }).done((data) => {
+    if (data == "예약이 삭제 되었습니다.") {
+      alert(data);
+      location.href = "reservation";
+    } else {
+      console.log(data);
+    }
+  });
+}
+
+// 담당자 예약 전체 삭제
+function deleteReservationAll() {
+  const checkbox = document.querySelectorAll(".res_checkBox:checked");
+
+  let res_status = 0;
+  let res_idxArr = [];
+  checkbox.forEach((elem) => {
+    res_status =
+      elem.parentElement.parentElement.querySelector(
+        "td:nth-child(9)"
+      ).innerText;
+    if (res_status == "승인불가") {
+      res_idxArr.push(elem.value);
+    }
+  });
+  $.post("./api/reservation", {
+    res_delAll: true,
+    res_idxArr: res_idxArr,
+  }).done((data) => {
+    if (data == "예약이 전체 삭제 되었습니다.") {
+      alert(data);
+      location.href = "reservation";
+    } else {
+      console.log(data);
+    }
+  });
+}

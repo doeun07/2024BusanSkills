@@ -28,5 +28,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "해당 날짜&시간은 휴일입니다!";
         }
+    } else if (isset($_POST["res_app"])) {
+        $res_idx = $_POST["res_idx"];
+        $sql = "UPDATE reservations SET res_status = '승인완료' WHERE res_idx = :res_idx";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":res_idx", $res_idx);
+        $stmt->execute();
+
+        echo "예약 승인이 완료되었습니다.";
+    } else if (isset($_POST["res_del"])) {
+        $res_idx = $_POST["res_idx"];
+        $sql = "UPDATE reservations SET res_status = '승인불가' WHERE res_idx = :res_idx";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":res_idx", $res_idx);
+        $stmt->execute();
+
+        echo "예약이 삭제 되었습니다.";
+    } else if (isset($_POST["res_delAll"])) {
+        $res_idxArr = $_POST["res_idxArr"];
+        foreach ($res_idxArr as $res_idx) {
+            $sql = "UPDATE reservations SET res_status = '승인불가' WHERE res_idx = :res_idx";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(":res_idx", $res_idx);
+            $stmt->execute();
+        }
+        echo "예약이 전체 삭제 되었습니다.";
     }
 }
