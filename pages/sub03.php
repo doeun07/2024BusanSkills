@@ -129,7 +129,8 @@
                         INNER JOIN users 
                         ON reservations.user_idx = users.user_idx
                         WHERE res_status = '승인완료'
-                        AND res_date > :yesterDay";
+                        AND res_date > :yesterDay
+                        ORDER BY res_date DESC, res_time DESC";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(":yesterDay", $yesterDay);
             $stmt->execute();
