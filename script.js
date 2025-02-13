@@ -819,3 +819,17 @@ function resLeagueHoliday() {
     });
   }
 }
+
+function payRequest(res_idx) {
+  $.post("./api/mypage", {
+    payRequest: true,
+    res_idx: res_idx,
+  }).done((data) => {
+    if (data == "결제요청이 완료되었습니다.") {
+      alert(data);
+      location.href = "./mypage";
+    } else {
+      console.log(data);
+    }
+  });
+}

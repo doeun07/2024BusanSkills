@@ -49,7 +49,7 @@
                                 $resTableHtml .= "<td>" . $value["res_status"] . "</td>";
                                 $resTableHtml .= "<td>" . $value["pay_status"] . "</td>";
                                 if ($value["res_status"] == "승인완료" && $value["pay_status"] == "결제전") {
-                                    $resTableHtml .= "<td><button class='btn btn-primary'>결제요청</button></td>";
+                                    $resTableHtml .= "<td><button onclick='payRequest(" . $value["res_idx"] . ")' class='btn btn-primary'>결제요청</button></td>";
                                 } else {
                                     $resTableHtml .= "<td><button class='btn btn-primary' disabled>결제요청</button></td>";
                                 }
