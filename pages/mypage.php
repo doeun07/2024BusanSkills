@@ -87,7 +87,45 @@
                                 $goodHtml .= "<td>" . $data["goods_idx"] . "</td>";
                                 $goodHtml .= "<td>" . $data["name"] . " </td>";
                                 $goodHtml .= "<td>" . number_format($data["price"]) . "원</td>";
-                                $goodHtml .= "<td><button class='btn btn-success'>장바구니</button></td>";
+                                $goodHtml .= "<td><a href='goodsDetail?goods_idx=" . $data["goods_idx"] . "' class='btn btn-success'>장바구니</a></td>";
+                                $goodHtml .= "<td><button class='btn btn-primary'>구매하기</button></td>";
+                                $goodHtml .= "</tr>";
+
+                                echo $goodHtml;
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+
+                    <h2 class="mt-2">장바구니 LIST</h2>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">굿즈명</th>
+                                <th scope="col">가격</th>
+                                <th scope="col">갯수</th>
+                                <th scope="col">총 가격</th>
+                                <th scope="col">구매하기</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $user_idx = $_SESSION["user_idx"];
+                            $sql = "SELECT * FROM shopping AS s 
+                            JOIN goods AS d ON d.goods_idx = s.goods_idx
+                            WHERE s.user_idx = :user_idx";
+                            $stmt = $pdo->prepare($sql);
+                            $stmt->bindParam(":user_idx", $user_idx);
+                            $stmt->execute();
+                            $goods = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach ($goods as $data) {
+                                $goodHtml = "";
+                                $goodHtml .= "<tr>";
+                                $goodHtml .= "<td>" . $data["name"] . " </td>";
+                                $goodHtml .= "<td>" . number_format($data["price"]) . "원</td>";
+                                $goodHtml .= "<td>" . $data["count"] . "개</td>";
+                                $goodHtml .= "<td>" . number_format($data["price"] * $data["count"]) . "원</td>";
                                 $goodHtml .= "<td><button class='btn btn-primary'>구매하기</button></td>";
                                 $goodHtml .= "</tr>";
 

@@ -845,9 +845,33 @@ function addGoodGoods(goods_idx) {
       location.href = "/mypage";
     } else if (data == "이미 등록된 굿즈입니다!") {
       alert(data);
-      location.href = "/goods";
+      location.href = "/mypage";
+    } else if (data == "로그인 후 이용가능한 기능입니다.") {
+      alert(data);
+      location.href = "/login";
     } else {
       console.log(data);
     }
   });
+}
+
+// 장바구니
+function addShopping(goods_idx) {
+  const count = document.querySelector("#count").value;
+  if (count <= 0) {
+    alert("상품 갯수는 1개 이상이여야합니다.");
+  } else {
+    $.post("./api/goods", {
+      shopping: true,
+      goods_idx: goods_idx,
+      count: count,
+    }).done((data) => {
+      if (data == "장바구니에 상품이 등록되었습니다.") {
+        alert(data);
+        location.href = "/mypage";
+      } else {
+        console.log(data);
+      }
+    });
+  }
 }

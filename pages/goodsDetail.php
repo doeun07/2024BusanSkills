@@ -35,7 +35,7 @@
         $goodsHtml .= "<hr>";
         $goodsHtml .= "<div class='d-flex justify-content-center'>";
         $goodsHtml .= "<p class='m-2'>갯수 : </p>";
-        $goodsHtml .= "<input class='goodsDetail_input' type='number' value='1' min='1'>";
+        $goodsHtml .= "<input id='count' class='goodsDetail_input' type='number' value='1' min='1'>";
         $goodsHtml .= "</div>";
         $goodsHtml .= "<div class='m-3'>";
         if (!isset($_SESSION["mb_level"])) {
@@ -44,7 +44,7 @@
             $goodsHtml .= "<button disabled class='m-1 btn btn-primary'>구매하기</button>";
         } else {
             $goodsHtml .= "<button class='m-1 btn btn-danger' onclick='addGoodGoods(" . $goods["goods_idx"] . ")'>관심굿즈등록</button>";
-            $goodsHtml .= "<button class='m-1 btn btn-success'>장바구니 담기</button>";
+            $goodsHtml .= "<button class='m-1 btn btn-success' onclick='addShopping(" . $goods["goods_idx"] . ")'>장바구니 담기</button>";
             $goodsHtml .= "<button class='m-1 btn btn-primary'>구매하기</button>";
         }
         $goodsHtml .= "</div>";
