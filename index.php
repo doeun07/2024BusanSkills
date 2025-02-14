@@ -56,6 +56,9 @@ if ($resource[1] == "api") {
         case "mypage":
             $page = "./pages/mypage.php";
             break;
+        case "goodsDetail":
+            $page = "./pages/goodsDetail.php";
+            break;
         default:
             echo "잘못된 접근입니다.";
             return 0;

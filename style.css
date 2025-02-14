@@ -696,3 +696,23 @@ input[name="top5"] {
 .mypage > table {
   text-align: center;
 }
+
+/* 굿즈페이지 */
+.goods_img {
+  width: 100px;
+  height: 100px;
+}
+
+/* 상세굿즈페이지 */
+.goodsDetail_img {
+  width: 500px;
+  border: 1px black solid;
+  border-radius: 20px;
+  margin: 20px;
+}
+
+.goodsDetail_input {
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 0 10px;
+}
