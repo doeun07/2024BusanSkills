@@ -60,6 +60,42 @@
                             ?>
                         </tbody>
                     </table>
+                    <h2 class="mt-2">관심 굿즈 LIST</h2>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">굿즈 아이디</th>
+                                <th scope="col">굿즈명</th>
+                                <th scope="col">가격</th>
+                                <th scope="col">장바구니</th>
+                                <th scope="col">구매하기</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sql = "SELECT * FROM good AS d 
+                            JOIN goods AS s ON d.goods_idx = s.goods_idx
+                            WHERE d.user_idx = :user_idx";
+                            $stmt = $pdo->prepare($sql);
+                            $stmt->bindParam(":user_idx", $user_idx);
+                            $stmt->execute();
+                            $goods = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach ($goods as $data) {
+                                $goodHtml = "";
+                                $goodHtml .= "<tr>";
+                                $goodHtml .= "<td>" . $data["goods_idx"] . "</td>";
+                                $goodHtml .= "<td>" . $data["name"] . " </td>";
+                                $goodHtml .= "<td>" . number_format($data["price"]) . "원</td>";
+                                $goodHtml .= "<td><button class='btn btn-success'>장바구니</button></td>";
+                                $goodHtml .= "<td><button class='btn btn-primary'>구매하기</button></td>";
+                                $goodHtml .= "</tr>";
+
+                                echo $goodHtml;
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 <?php
                 } else {
                 ?>
@@ -71,10 +107,7 @@
     <?php
             }
     ?>
-    <!-- <script>
-            alert("로그인 후 이용가능한 페이지입니다!");
-            location.href = "login";
-        </script> -->
+
 
     </div>
 

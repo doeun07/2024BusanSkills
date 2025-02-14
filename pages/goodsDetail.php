@@ -43,7 +43,7 @@
             $goodsHtml .= "<button disabled class='m-1 btn btn-success'>장바구니 담기</button>";
             $goodsHtml .= "<button disabled class='m-1 btn btn-primary'>구매하기</button>";
         } else {
-            $goodsHtml .= "<button class='m-1 btn btn-danger'>관심굿즈등록</button>";
+            $goodsHtml .= "<button class='m-1 btn btn-danger' onclick='addGoodGoods(" . $goods["goods_idx"] . ")'>관심굿즈등록</button>";
             $goodsHtml .= "<button class='m-1 btn btn-success'>장바구니 담기</button>";
             $goodsHtml .= "<button class='m-1 btn btn-primary'>구매하기</button>";
         }

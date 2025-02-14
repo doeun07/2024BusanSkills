@@ -833,3 +833,21 @@ function payRequest(res_idx) {
     }
   });
 }
+
+// 관심 굿즈 등록
+function addGoodGoods(goods_idx) {
+  $.post("./api/goods", {
+    goodGoods: true,
+    goods_idx: goods_idx,
+  }).done((data) => {
+    if (data == "관심 굿즈 등록이 완료되었습니다.") {
+      alert(data);
+      location.href = "/mypage";
+    } else if (data == "이미 등록된 굿즈입니다!") {
+      alert(data);
+      location.href = "/goods";
+    } else {
+      console.log(data);
+    }
+  });
+}

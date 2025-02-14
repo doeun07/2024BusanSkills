@@ -14,6 +14,7 @@
         <h1>GOODS LIST</h1>
         <table class="goods_table table table-striped text-center">
             <thead>
+
                 <tr>
                     <th scope="col">연번</th>
                     <th scope="col">이미지</th>
@@ -42,16 +43,16 @@
                             $goodsHtml .= "<td><img class='goods_img' src='../선수제공파일/B_Module/goods/" . $data["goods_idx"] . ".jpg' alt=''></td>";
                         }
                         $goodsHtml .= "<td>" . $data["name"] . "</td>";
-                        if(!isset($_SESSION["mb_level"])) {
+                        if (!isset($_SESSION["mb_level"])) {
                             $goodsHtml .= "<td><button disabled class='btn btn-danger'>관심 상품 등록</button></td>";
                             $goodsHtml .= "<td><button disabled class='btn btn-success'>장바구니</button></td>";
                             $goodsHtml .= "<td><button disabled class='btn btn-primary'>구매하기</button></td>";
                         } else {
-                            $goodsHtml .= "<td><button class='btn btn-danger'>관심 상품 등록</button></td>";
+                            $goodsHtml .= "<td><button onclick='addGoodGoods(" . $data["goods_idx"] . ")' class='btn btn-danger'>관심 상품 등록</button></td>";
                             $goodsHtml .= "<td><button class='btn btn-success'>장바구니</button></td>";
                             $goodsHtml .= "<td><button class='btn btn-primary'>구매하기</button></td>";
                         }
-                        $goodsHtml .= "<td><a href='goodsDetail?goods_idx=".$data["goods_idx"]."' class='btn btn-dark'>상세페이지</a></td>";
+                        $goodsHtml .= "<td><a href='goodsDetail?goods_idx=" . $data["goods_idx"] . "' class='btn btn-dark'>상세페이지</a></td>";
                         $goodsHtml .= "</tr>";
 
                         echo $goodsHtml;
