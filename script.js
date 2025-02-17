@@ -933,12 +933,55 @@ function ShoppingAddBuy(shopping_idx) {
     shoppingBuy: true,
     shopping_idx: shopping_idx,
   }).done((data) => {
-    if(data == "구매가 완료되었습니다.") {
+    if (data == "구매가 완료되었습니다.") {
       alert(data);
       location.href = "/mypage";
     } else {
       console.log(data);
     }
-  })
+  });
+}
 
+// goods 등록
+function addGoods() {
+  const img = document.querySelector("#img").files[0];
+  const title = document.querySelector("#title").value;
+  const detail = document.querySelector("#detail").value;
+  const price = document.querySelector("#price").value;
+
+  if (!img) {
+    alert("상품 이미지를 입력해주세요!");
+  } else if (!title) {
+    alert("상품명을 입력해주세요!");
+  } else if (!detail) {
+    alert("상품 설명을 입력해주세요!");
+  } else if (!price) {
+    alert("상품 가격을 입력해주세요!");
+  } else {
+    const reader = new FileReader();
+
+    reader.onloadend = function () {
+      const imgUrl = reader.result;
+
+      $.post("./api/goods", {
+        addGoods: true,
+        img: imgUrl,
+        title: title,
+        detail: detail,
+        price: price,
+      })
+        .done((data) => {
+          if (data === "상품이 정상적으로 등록되었습니다.") {
+            alert(data);
+          } else {
+            console.log(data);
+          }
+        })
+        .fail(() => {
+          alert("서버 요청에 실패했습니다.");
+        });
+    };
+
+    reader.readAsDataURL(img);
+  }
 }

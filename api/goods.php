@@ -88,5 +88,34 @@ if (!isset($_SESSION["mb_level"])) {
         $stmt->execute([$shopping_idx, $total_price]);
 
         echo "구매가 완료되었습니다.";
+    } else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["addGoods"])) {
+        $title = $_POST['title'];
+        $detail = $_POST['detail'];
+        $price = $_POST['price'];
+        $imgUrl = $_POST['img'];
+
+
+        $sql = "INSERT INTO goods (name, detail, price) VALUES (?, ?, ?)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $title);
+        $stmt->bindParam(2, $detail);
+        $stmt->bindParam(3, $price);
+        $stmt->execute();
+
+        $goods_idx = $pdo->lastInsertId();
+
+        $imgBase64 = preg_replace('/^data:image\/\w+;base64,/', '', $imgUrl);
+
+        $uniqueFileName = $goods_idx . '.jpg';
+
+        $uploadDir = __DIR__ . "/../선수제공파일/B_Module/goods/";
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+        $fullImgPath = $uploadDir . $uniqueFileName;
+
+        file_put_contents($fullImgPath, base64_decode($imgBase64));
+
+        echo "상품이 정상적으로 등록되었습니다.";
     }
 }
