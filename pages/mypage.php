@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <div class="mypage">
-            <h2>예약 현황 확인</h2>
+            <h2>예약 정보 확인</h2>
             <?php
             if (isset($_SESSION["user_idx"]) && $_SESSION["mb_level"] == "일반회원") {
                 $user_idx = $_SESSION["user_idx"];
@@ -31,9 +31,7 @@
                                 <th scope="col">시간</th>
                                 <th scope="col">인원</th>
                                 <th scope="col">가격</th>
-                                <th scope="col">예약승인상태</th>
-                                <th scope="col">결제승인상태</th>
-                                <th scope="col">결제요청버튼</th>
+                                <th scope="col">승인상태</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,12 +44,14 @@
                                 $resTableHtml .= "<td>" . $value["res_time"] . "시</td>";
                                 $resTableHtml .= "<td>" . $value["min_human"] . "명</td>";
                                 $resTableHtml .= "<td>" . number_format($value["price"]) . "원</td>";
-                                $resTableHtml .= "<td>" . $value["res_status"] . "</td>";
-                                $resTableHtml .= "<td>" . $value["pay_status"] . "</td>";
-                                if ($value["res_status"] == "승인완료" && $value["pay_status"] == "결제전") {
+                                if ($value["res_status"] == "승인대기") {
+                                    $resTableHtml .= "<td>예약 신청</td>";
+                                } else if ($value["pay_status"] == "결제전" && $value["res_status"] == "승인완료") {
                                     $resTableHtml .= "<td><button onclick='payRequest(" . $value["res_idx"] . ")' class='btn btn-primary'>결제요청</button></td>";
+                                } else if ($value["pay_status"] == "결제요청") {
+                                    $resTableHtml .= "<td>결제 승인 전</td>";
                                 } else {
-                                    $resTableHtml .= "<td><button class='btn btn-primary' disabled>결제요청</button></td>";
+                                    $resTableHtml .= "<td>" . $value["pay_status"] . "</td>";
                                 }
                                 $resTableHtml .= "</tr>";
 
@@ -65,6 +65,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">굿즈 아이디</th>
+                                <th scope="col">사진</th>
                                 <th scope="col">굿즈명</th>
                                 <th scope="col">가격</th>
                                 <th scope="col">장바구니</th>
@@ -85,7 +86,8 @@
                                 $goodHtml = "";
                                 $goodHtml .= "<tr>";
                                 $goodHtml .= "<td>" . $data["goods_idx"] . "</td>";
-                                $goodHtml .= "<td>" . $data["name"] . " </td>";
+                                $goodHtml .= "<td><img class='goods_img' src='../선수제공파일/B_Module/goods/0" . $data["goods_idx"] . ".jpg' alt=''>";
+                                $goodHtml .= "<td><a href='goodsDetail?goods_idx=" . $data["goods_idx"] . "'>" . $data["name"] . "</a></td>";
                                 $goodHtml .= "<td>" . number_format($data["price"]) . "원</td>";
                                 $goodHtml .= "<td><a href='goodsDetail?goods_idx=" . $data["goods_idx"] . "' class='btn btn-success'>장바구니</a></td>";
                                 $goodHtml .= "<td><a href='buy?goods_idx=" . $data["goods_idx"] . "' class='btn btn-primary'>구매하기</a></td>";
@@ -156,7 +158,8 @@
                             $sql = "SELECT * FROM shopping AS s 
                             JOIN goods AS d ON d.goods_idx = s.goods_idx
                             JOIN buy AS b ON b.shopping_idx = s.shopping_idx
-                            WHERE s.user_idx = :user_idx";
+                            WHERE s.user_idx = :user_idx
+                            ORDER BY b.total_price DESC";
                             $stmt = $pdo->prepare($sql);
                             $stmt->bindParam(":user_idx", $user_idx);
                             $stmt->execute();
@@ -168,7 +171,7 @@
                                 $goodHtml .= "<td>" . $data["name"] . " </td>";
                                 $goodHtml .= "<td>" . number_format($data["price"]) . "원</td>";
                                 $goodHtml .= "<td>" . $data["count"] . "개</td>";
-                                $goodHtml .= "<td>" . number_format($data["price"] * $data["count"]) . "원</td>";
+                                $goodHtml .= "<td>" . number_format($data["total_price"]) . "원</td>";
                                 $goodHtml .= "</tr>";
 
                                 echo $goodHtml;
