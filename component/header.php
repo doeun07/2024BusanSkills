@@ -1,5 +1,5 @@
 <header>
-    <a href="./"><img class="logo" src="./logo.png" alt=""></a>
+    <a href="./"><img class="logo" src="../logo.png" alt=""></a>
     <ul>
         <li><a href="information">INFORMATION</a></li>
         <li><a href="statistics">STATISTICS</a></li>

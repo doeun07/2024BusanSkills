@@ -45,7 +45,7 @@
         } else {
             $goodsHtml .= "<button class='m-1 btn btn-danger' onclick='addGoodGoods(" . $goods["goods_idx"] . ")'>관심굿즈등록</button>";
             $goodsHtml .= "<button class='m-1 btn btn-success' onclick='addShopping(" . $goods["goods_idx"] . ")'>장바구니 담기</button>";
-            $goodsHtml .= "<button class='m-1 btn btn-primary'>구매하기</button>";
+            $goodsHtml .= "<button class='m-1 btn btn-primary' onclick='addShoppingAndBuy(" . $goods["goods_idx"] . ")'>구매하기</button>";
         }
         $goodsHtml .= "</div>";
         $goodsHtml .= "</div>";

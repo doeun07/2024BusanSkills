@@ -866,7 +866,58 @@ function addShopping(goods_idx) {
       goods_idx: goods_idx,
       count: count,
     }).done((data) => {
-      if (data == "장바구니에 상품이 등록되었습니다.") {
+      if (data.message == "장바구니에 상품이 등록되었습니다.") {
+        alert(data.message);
+        location.href = "/mypage";
+      } else {
+        console.log(data);
+      }
+    });
+  }
+}
+
+// 굿즈 디테일 페이지에서 구매할 시
+// 장바구니에 넣고 구매페이지로 이동
+function addShoppingAndBuy(goods_idx) {
+  const count = document.querySelector("#count").value;
+  if (count <= 0) {
+    alert("상품 갯수는 1개 이상이여야합니다.");
+  } else {
+    $.post("./api/goods", {
+      shopping: true,
+      goods_idx: goods_idx,
+      count: count,
+    }).done((response) => {
+      let data = JSON.parse(response);
+      if (data.message == "장바구니에 상품이 등록되었습니다.") {
+        location.href = `/buy?shopping_idx=${data.shopping_idx}`;
+      } else {
+        console.log(data);
+      }
+    });
+  }
+}
+
+// 장바구니에서 구매
+function buyPage(shopping_idx) {
+  location.href = `/buy?shopping_idx=${shopping_idx}`;
+}
+
+// count 없이 구매 페이지 이동
+// a 태그 href 속성으로 이동 구현
+
+// 장바구니에 없는 상태에 구매
+function addBuy(goods_idx) {
+  const count = document.querySelector("#count").value;
+  if (count <= 0) {
+    alert("상품 갯수는 1개 이상이여야합니다.");
+  } else {
+    $.post("./api/goods", {
+      buy: true,
+      goods_idx: goods_idx,
+      count: count,
+    }).done((data) => {
+      if (data == "구매가 완료되었습니다.") {
         alert(data);
         location.href = "/mypage";
       } else {
@@ -874,4 +925,20 @@ function addShopping(goods_idx) {
       }
     });
   }
+}
+
+// 장바구니 있는 상태로 구매
+function ShoppingAddBuy(shopping_idx) {
+  $.post("./api/goods", {
+    shoppingBuy: true,
+    shopping_idx: shopping_idx,
+  }).done((data) => {
+    if(data == "구매가 완료되었습니다.") {
+      alert(data);
+      location.href = "/mypage";
+    } else {
+      console.log(data);
+    }
+  })
+
 }

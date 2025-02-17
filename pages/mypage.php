@@ -88,7 +88,7 @@
                                 $goodHtml .= "<td>" . $data["name"] . " </td>";
                                 $goodHtml .= "<td>" . number_format($data["price"]) . "원</td>";
                                 $goodHtml .= "<td><a href='goodsDetail?goods_idx=" . $data["goods_idx"] . "' class='btn btn-success'>장바구니</a></td>";
-                                $goodHtml .= "<td><button class='btn btn-primary'>구매하기</button></td>";
+                                $goodHtml .= "<td><a href='buy?goods_idx=" . $data["goods_idx"] . "' class='btn btn-primary'>구매하기</a></td>";
                                 $goodHtml .= "</tr>";
 
                                 echo $goodHtml;
@@ -113,6 +113,7 @@
                             $user_idx = $_SESSION["user_idx"];
                             $sql = "SELECT * FROM shopping AS s 
                             JOIN goods AS d ON d.goods_idx = s.goods_idx
+                            LEFT JOIN buy AS b ON b.shopping_idx = s.shopping_idx
                             WHERE s.user_idx = :user_idx";
                             $stmt = $pdo->prepare($sql);
                             $stmt->bindParam(":user_idx", $user_idx);
@@ -126,7 +127,48 @@
                                 $goodHtml .= "<td>" . number_format($data["price"]) . "원</td>";
                                 $goodHtml .= "<td>" . $data["count"] . "개</td>";
                                 $goodHtml .= "<td>" . number_format($data["price"] * $data["count"]) . "원</td>";
-                                $goodHtml .= "<td><button class='btn btn-primary'>구매하기</button></td>";
+                                if (isset($data["buy_idx"])) {
+                                    $goodHtml .= "<td><button disabled onclick='buyPage(" . $data["shopping_idx"] . ")' class='btn btn-primary'>구매하기</button></td>";
+                                } else {
+                                    $goodHtml .= "<td><button onclick='buyPage(" . $data["shopping_idx"] . ")' class='btn btn-primary'>구매하기</button></td>";
+                                }
+                                $goodHtml .= "</tr>";
+
+                                echo $goodHtml;
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+
+                    <h2 class="mt-2">구매 LIST</h2>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">굿즈명</th>
+                                <th scope="col">가격</th>
+                                <th scope="col">갯수</th>
+                                <th scope="col">총 가격</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $user_idx = $_SESSION["user_idx"];
+                            $sql = "SELECT * FROM shopping AS s 
+                            JOIN goods AS d ON d.goods_idx = s.goods_idx
+                            JOIN buy AS b ON b.shopping_idx = s.shopping_idx
+                            WHERE s.user_idx = :user_idx";
+                            $stmt = $pdo->prepare($sql);
+                            $stmt->bindParam(":user_idx", $user_idx);
+                            $stmt->execute();
+                            $goods = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach ($goods as $data) {
+                                $goodHtml = "";
+                                $goodHtml .= "<tr>";
+                                $goodHtml .= "<td>" . $data["name"] . " </td>";
+                                $goodHtml .= "<td>" . number_format($data["price"]) . "원</td>";
+                                $goodHtml .= "<td>" . $data["count"] . "개</td>";
+                                $goodHtml .= "<td>" . number_format($data["price"] * $data["count"]) . "원</td>";
                                 $goodHtml .= "</tr>";
 
                                 echo $goodHtml;
